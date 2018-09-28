@@ -1,0 +1,37 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: apache
+  name: apache
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: apache
+  template:
+    metadata:
+      labels:
+        run: apache
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: kworker-1
+      containers:
+      - image: httpd:2.4
+        name: apache
+        command:
+        - /bin/bash
+        - -c
+        - |
+          httpd && sleep 365d
+        volumeMounts:
+        - name: apache-volume
+          mountPath: /usr/local/apache2/conf
+          subPath: conf
+        - name: apache-volume
+          mountPath: /usr/local/apache2/logs
+          subPath: logs
+      volumes:
+      - name: apache-volume
+        persistentVolumeClaim:
+          claimName: pvc0001
