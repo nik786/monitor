@@ -1,0 +1,21 @@
+---
+- name: install | Copy etcd binary from download dir
+  shell: |
+    rsync -piu "{{ local_release_dir }}/etcd-{{ etcd_version }}-linux-amd64/etcd" "{{ bin_dir }}/etcd"
+    rsync -piu "{{ local_release_dir }}/etcd-{{ etcd_version }}-linux-amd64/etcdctl" "{{ bin_dir }}/etcdctl"
+  changed_when: false
+  when: etcd_cluster_setup
+
+- name: install | Set etcd binary permissions
+  file:
+    path: "{{ bin_dir }}/etcd"
+    mode: "0755"
+    state: file
+  when: etcd_cluster_setup
+
+- name: install | Set etcdctl binary permissions
+  file:
+    path: "{{ bin_dir }}/etcdctl"
+    mode: "0755"
+    state: file
+  when: etcd_cluster_setup
