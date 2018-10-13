@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+  namespace: logging
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: kworker-1 
+  containers:
+  - name: 1st
+    image: nginx
