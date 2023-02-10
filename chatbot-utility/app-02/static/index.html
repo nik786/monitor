@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyChatBot</title>
+    <!-- Style link ne pas inversé l'ordre de chargement-->
+    <link rel="stylesheet" href="stylesheet/style.css">
+    <link rel="stylesheet" href="stylesheet/bot.css">
+    <!-- Script ChatBot link -->
+    <script defer src="script/chat.js"></script>
+    <script defer src="script/bot.js"></script>
+</head>
+<body>
+
+
+
+<div>
+    <div id="chatbot" class="main-card collapsed">
+        <button id="chatbot_toggle">
+            <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15 4v7H5.17l-.59.59-.58.58V4h11m1-2H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm5 4h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+        <div class="main-title">
+            <div>
+               
+               
+                <img src="img/bot-mini.png" alt="avatar">
+                
+            </div>
+            <span style="margin-left:20px;">plato</span>
+        </div>
+
+        <div class="chat-area" id="message-box">
+            <div id="easychat-container" class="chatbox">
+                <div id="easychat-inner" class="message">
+                    <div id="easychat"></div>
+                </div>
+            </div>
+
+        </div>
+        <div><input type="text" name="msg" id="msg" placeholder="Type a plato..." style="padding: 4px;width: 60%;border-radius: 5px;border: 1px solid #666;margin: 5px;"/></div>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script type="text/javascript">
+ $(document).ready(function(){
+ $("#msg").on('keypress',function(e) {
+    if(e.which == 13) {
+     var ss = $(this).val();
+     let result = ss.toLowerCase();
+
+var param1 = new Date();
+var param2 = param1.getHours() + ':' + param1.getMinutes();
+     $("#easychat").last().append("<div><div class='chat-ask activated'><strong>"+ss+"</strong></div><div style='font-size:11px;color:#666;text-align:right;'>"+param2+"</div></div>");
+
+     setTimeout(function() {
+      if(ss!='')
+      {
+        
+        if(result == 'how are you?')
+        {
+         $("#easychat").last().append('<b style="font-size:12px;color:#000;">Plato</b><div style="display:flex;"><div><img src="img/bot-mini.png" style="width:25px;height:25px;margin-left:5px;"/></div><div class="chat-response activated">Good!! You?</div></div>'); 
+        }
+        else if(result == 'hii bonjour !')
+        {
+         $("#easychat").last().append('<b style="font-size:12px;color:#000;">Plato</b><div style="display:flex;"><div><img src="img/bot-mini.png" style="width:25px;height:25px;margin-left:5px;"/></div><div class="chat-response activated">Hii! !</div></div>'); 
+        }
+        else
+        {
+         $("#easychat").last().append('<b style="font-size:12px;color:#000;">Plato</b><div style="display:flex;"><div><img src="img/bot-mini.png" style="width:25px;height:25px;margin-left:5px;"/></div><div class="chat-response activated">Thanks!!!</div></div>'); 
+        }
+       }
+       
+        }, 1000);
+       $("#msg").val(''); 
+    }
+});
+});
+</script>
+</body>
+</html>
